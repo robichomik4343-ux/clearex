@@ -288,7 +288,7 @@ body{
     font-weight:500;
 }
 
-.download-btn, .back-btn, .review-btn, .delete-btn, .google-btn{
+.download-btn, .back-btn, .review-btn, .delete-btn, .google-btn, .reply-btn{
     margin-top:50px;
     padding:20px 50px;
     border-radius:50px;
@@ -304,7 +304,7 @@ body{
     letter-spacing:0.5px;
 }
 
-.download-btn::before, .back-btn::before, .review-btn::before, .delete-btn::before, .google-btn::before{
+.download-btn::before, .back-btn::before, .review-btn::before, .delete-btn::before, .google-btn::before, .reply-btn::before{
     content:'';
     position:absolute;
     top:0;
@@ -316,17 +316,17 @@ body{
     z-index:-1;
 }
 
-.download-btn:hover::before, .back-btn:hover::before, .review-btn:hover::before, .delete-btn:hover::before, .google-btn:hover::before{
+.download-btn:hover::before, .back-btn:hover::before, .review-btn:hover::before, .delete-btn:hover::before, .google-btn:hover::before, .reply-btn:hover::before{
     left:0;
 }
 
-.download-btn:hover, .back-btn:hover, .review-btn:hover, .delete-btn:hover, .google-btn:hover{
+.download-btn:hover, .back-btn:hover, .review-btn:hover, .delete-btn:hover, .google-btn:hover, .reply-btn:hover{
     border-color:#ec4899;
     box-shadow:0 0 50px rgba(124,58,237,0.6), 0 0 25px rgba(236,72,153,0.4);
     transform:translateY(-5px) scale(1.05);
 }
 
-.download-btn:active, .back-btn:active, .review-btn:active, .delete-btn:active, .google-btn:active{
+.download-btn:active, .back-btn:active, .review-btn:active, .delete-btn:active, .google-btn:active, .reply-btn:active{
     transform:translateY(-2px) scale(1.02);
 }
 
@@ -359,6 +359,17 @@ body{
 .delete-btn:hover{
     border-color:#dc2626;
     box-shadow:0 0 30px rgba(239,68,68,0.4);
+}
+
+.reply-btn{
+    margin-top:10px;
+    padding:10px 20px;
+    font-size:14px;
+    border-color:#06b6d4;
+}
+
+.reply-btn::before{
+    background:linear-gradient(90deg, #06b6d4, #7c3aed);
 }
 
 #download-status{
@@ -467,11 +478,28 @@ body{
     justify-content:space-between;
     align-items:center;
     margin-bottom:15px;
+    flex-wrap:wrap;
+    gap:15px;
+}
+
+.review-author-section{
+    display:flex;
+    align-items:center;
+    gap:15px;
 }
 
 .review-author{
     font-weight:700;
     color:#7c3aed;
+}
+
+.creator-badge{
+    background:linear-gradient(135deg, #ec4899, #7c3aed);
+    padding:4px 12px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:700;
+    color:white;
 }
 
 .review-date{
@@ -494,12 +522,54 @@ body{
 .review-actions{
     display:flex;
     gap:10px;
+    flex-wrap:wrap;
 }
 
 .delete-btn{
     margin:0;
     padding:8px 16px;
     font-size:13px;
+}
+
+.reply-btn{
+    margin:0;
+    padding:8px 16px;
+    font-size:13px;
+}
+
+/* REPLIES */
+.replies-section{
+    margin-top:20px;
+    padding-top:20px;
+    border-top:1px solid rgba(124,58,237,0.2);
+}
+
+.reply-card{
+    background:rgba(17,17,17,0.6);
+    border-left:3px solid #06b6d4;
+    border-radius:10px;
+    padding:15px;
+    margin-bottom:15px;
+    margin-left:20px;
+}
+
+.reply-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:10px;
+    gap:10px;
+}
+
+.reply-author{
+    font-weight:700;
+    color:#06b6d4;
+}
+
+.reply-text{
+    color:#cbd5e1;
+    font-size:14px;
+    line-height:1.5;
 }
 
 /* REVIEW FORM */
@@ -573,6 +643,11 @@ body{
 .submit-review-btn{
     width:100%;
     margin-top:0;
+}
+
+.submit-reply-btn{
+    padding:12px 30px;
+    margin-top:15px;
 }
 
 /* SECTION */
@@ -717,6 +792,74 @@ body{
     display:block;
 }
 
+/* MODAL LOGIN */
+.modal{
+    display:none;
+    position:fixed;
+    z-index:1000;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    background-color:rgba(0,0,0,0.9);
+    animation:fadeIn 0.3s ease;
+}
+
+.modal.show{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+@keyframes fadeIn{
+    from{opacity:0;}
+    to{opacity:1;}
+}
+
+.modal-content{
+    background:rgba(30,30,50,0.95);
+    border:2px solid rgba(124,58,237,0.5);
+    border-radius:25px;
+    padding:50px;
+    max-width:500px;
+    width:90%;
+    backdrop-filter:blur(20px);
+    text-align:center;
+}
+
+.modal-content h2{
+    font-size:32px;
+    margin-bottom:20px;
+    background:linear-gradient(135deg, #ffffff 0%, #7c3aed 50%, #ec4899 100%);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    background-clip:text;
+}
+
+.modal-content p{
+    color:#cbd5e1;
+    margin-bottom:30px;
+    font-size:16px;
+}
+
+.modal-content .google-btn{
+    margin-top:0;
+    margin-bottom:15px;
+}
+
+.close-modal{
+    color:#cbd5e1;
+    float:right;
+    font-size:28px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:color 0.3s ease;
+}
+
+.close-modal:hover{
+    color:#7c3aed;
+}
+
 /* RESPONSIVE */
 @media(max-width:768px){
     .hero h1{font-size:45px;}
@@ -729,6 +872,8 @@ body{
     .hero{padding-top:80px;}
     .feature-page{padding:100px 20px;}
     .back-btn{display:block;margin-bottom:20px;}
+    .review-header{flex-direction:column;align-items:flex-start;}
+    .modal-content{padding:30px;}
 }
 
 </style>
@@ -742,6 +887,22 @@ body{
     <div class="orb orb-pink"></div>
     <div class="orb orb-cyan"></div>
     <div class="orb orb-violet"></div>
+</div>
+
+<!-- LOGIN MODAL -->
+<div id="login-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeLoginModal()">&times;</span>
+        <h2 id="modal-title">Zaloguj się</h2>
+        <p id="modal-desc">Musisz się zalogować aby dodać opinię</p>
+        <div id="google-login-container"></div>
+        <p id="or-text" style="margin-top:20px;color:#64748b;">— LUB —</p>
+        <button class="review-btn" onclick="showSimpleLogin()" id="simple-login-btn">📧 Zaloguj się emailem</button>
+        <div id="simple-login-form" style="display:none;margin-top:20px;text-align:left;">
+            <input type="email" id="simple-email" placeholder="Twój email" style="margin-bottom:10px;">
+            <button class="submit-review-btn" onclick="loginWithEmail()">Zaloguj</button>
+        </div>
+    </div>
 </div>
 
 <div class="nav">
@@ -835,19 +996,11 @@ body{
         
         <h2 id="reviews-page-title" style="font-size:45px;margin-bottom:50px;background:linear-gradient(135deg, #ffffff 0%, #7c3aed 50%, #ec4899 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Dodaj opinię</h2>
 
-        <!-- LOGIN FORM -->
-        <div id="login-section" class="review-form-container">
-            <h3 id="login-title">Zaloguj się aby dodać opinię</h3>
-            <button class="google-btn" onclick="loginWithGoogle()" id="google-login-btn">
-                🔐 Zaloguj się przez Google
-            </button>
-        </div>
-
         <!-- REVIEW FORM (hidden until login) -->
         <div id="review-form-section" class="review-form-container" style="display:none;">
             <div style="margin-bottom:20px;padding:15px;background:rgba(124,58,237,0.2);border-radius:10px;">
                 <p id="logged-user" style="color:#cbd5e1;"></p>
-                <button onclick="logout()" style="background:#ef4444;color:white;border:none;padding:8px 16px;border-radius:8px;cursor:pointer;font-weight:600;">Wyloguj</button>
+                <button onclick="logout()" id="logout-btn" style="background:#ef4444;color:white;border:none;padding:8px 16px;border-radius:8px;cursor:pointer;font-weight:600;">Wyloguj</button>
             </div>
             
             <form onsubmit="submitReview(event)">
@@ -873,6 +1026,12 @@ body{
             </form>
         </div>
 
+        <!-- LOGIN PROMPT -->
+        <div id="login-prompt" class="review-form-container">
+            <h3 id="login-prompt-title">Zaloguj się aby dodać opinię</h3>
+            <button class="review-btn" onclick="openLoginModal()" id="open-login-btn">🔐 Zaloguj się</button>
+        </div>
+
         <!-- ALL REVIEWS -->
         <div style="margin-top:60px;max-width:900px;margin-left:auto;margin-right:auto;">
             <h3 id="all-reviews-title" style="font-size:32px;margin-bottom:40px;text-align:center;color:#cbd5e1;">Wszystkie opinie</h3>
@@ -881,9 +1040,9 @@ body{
 
         <!-- ADMIN SECTION -->
         <div id="admin-section" class="admin-section">
-            <h3>Panel Administratora</h3>
+            <h3>👑 Panel Administratora</h3>
             <p id="admin-info"></p>
-            <button onclick="showAllReviewsAdmin()" style="background:#ef4444;color:white;border:none;padding:10px 20px;border-radius:8px;cursor:pointer;font-weight:600;margin-top:10px;">Zarządzaj opiniami</button>
+            <button onclick="exportReviews()" style="background:#7c3aed;color:white;border:none;padding:10px 20px;border-radius:8px;cursor:pointer;font-weight:600;margin:5px;">📥 Eksportuj opinie</button>
         </div>
     </div>
 </div>
@@ -894,7 +1053,7 @@ body{
 
 let currentUser=null;
 let userEmail=null;
-const ADMIN_EMAIL='clearnixapp@gmail.com'; // Zmień na twój email administratora
+const ADMIN_EMAIL='clearnixapp@gmail.com';
 
 // STARS EFFECT
 function createStars(){
@@ -914,11 +1073,24 @@ createStars();
 
 // INIT GOOGLE AUTH
 function initializeGoogleAuth(){
-    google.accounts.id.initialize({
-        client_id:'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com', // Zmień na swój Google Client ID
-        callback:handleCredentialResponse,
-        auto_select:false
-    });
+    try{
+        google.accounts.id.initialize({
+            client_id:'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com',
+            callback:handleCredentialResponse,
+            auto_select:false
+        });
+        
+        google.accounts.id.renderButton(
+            document.getElementById('google-login-container'),
+            {
+                theme:'outline',
+                size:'large',
+                width:'100%'
+            }
+        );
+    }catch(err){
+        console.log('Google Auth not available');
+    }
 }
 
 function handleCredentialResponse(response){
@@ -928,6 +1100,7 @@ function handleCredentialResponse(response){
         userEmail=decoded.email;
         showReviewForm();
         loadReviews();
+        closeLoginModal();
     }catch(err){
         alert('Błąd autoryzacji. Spróbuj ponownie.');
     }
@@ -942,35 +1115,40 @@ function jwt_decode(token){
     return JSON.parse(jsonPayload);
 }
 
-function loginWithGoogle(){
-    google.accounts.id.renderButton(
-        document.querySelector('.google-btn'),
-        {theme:'outline',size:'large'}
-    );
-    document.querySelector('.google-btn').click();
+function showSimpleLogin(){
+    document.getElementById('simple-login-form').style.display='block';
+    document.getElementById('simple-login-btn').style.display='none';
 }
 
-// Alternatywnie bez Google (localStоrage)
 function loginWithEmail(){
-    const email=prompt('Podaj email:');
-    if(!email) return;
-    
-    // Sprawdzamy czy ten email już pisał opinię
-    const reviews=JSON.parse(localStorage.getItem('reviews')||'[]');
-    if(reviews.some(r=>r.email===email)){
-        alert('Już dodałeś opinię z tego emaila!');
+    const email=document.getElementById('simple-email').value;
+    if(!email) {
+        alert('Podaj email!');
         return;
     }
     
     currentUser=email.split('@')[0];
     userEmail=email;
     showReviewForm();
+    loadReviews();
+    closeLoginModal();
+}
+
+function openLoginModal(){
+    document.getElementById('login-modal').classList.add('show');
+}
+
+function closeLoginModal(){
+    document.getElementById('login-modal').classList.remove('show');
+    document.getElementById('simple-login-form').style.display='none';
+    document.getElementById('simple-login-btn').style.display='block';
+    document.getElementById('simple-email').value='';
 }
 
 function showReviewForm(){
-    document.getElementById('login-section').style.display='none';
+    document.getElementById('login-prompt').style.display='none';
     document.getElementById('review-form-section').style.display='block';
-    document.getElementById('logged-user').innerText=`Zalogowany jako: ${currentUser} (${userEmail})`;
+    document.getElementById('logged-user').innerText=`✓ Zalogowany jako: ${currentUser}`;
     
     // Jeśli admin, pokaż panel
     if(userEmail===ADMIN_EMAIL){
@@ -981,9 +1159,12 @@ function showReviewForm(){
 function logout(){
     currentUser=null;
     userEmail=null;
-    document.getElementById('login-section').style.display='block';
+    document.getElementById('login-prompt').style.display='block';
     document.getElementById('review-form-section').style.display='none';
     document.getElementById('admin-section').classList.remove('show');
+    document.getElementById('rating').value='';
+    document.getElementById('opinion').value='';
+    loadReviews();
 }
 
 function submitReview(e){
@@ -1016,7 +1197,8 @@ function submitReview(e){
         rating:parseInt(rating),
         text:opinion,
         date:new Date().toLocaleDateString('pl-PL'),
-        approved:true // Automatyczne zatwierdzenie, ale admin może usuwać
+        approved:true,
+        replies:[]
     };
     
     reviews.push(review);
@@ -1030,6 +1212,35 @@ function submitReview(e){
     loadReviews();
 }
 
+function submitReply(e,reviewId){
+    e.preventDefault();
+    
+    if(userEmail!==ADMIN_EMAIL){
+        alert('Tylko admin może odpowiadać!');
+        return;
+    }
+    
+    const replyText=document.getElementById(`reply-text-${reviewId}`).value;
+    if(!replyText.trim()){
+        alert('Wpisz odpowiedź!');
+        return;
+    }
+    
+    let reviews=JSON.parse(localStorage.getItem('reviews')||'[]');
+    const review=reviews.find(r=>r.id===reviewId);
+    
+    if(review){
+        if(!review.replies) review.replies=[];
+        review.replies.push({
+            author:'Clearnix Creator',
+            text:replyText,
+            date:new Date().toLocaleDateString('pl-PL')
+        });
+        localStorage.setItem('reviews',JSON.stringify(reviews));
+        loadReviews();
+    }
+}
+
 function loadReviews(){
     const reviews=JSON.parse(localStorage.getItem('reviews')||'[]');
     const isAdmin=userEmail===ADMIN_EMAIL;
@@ -1037,23 +1248,105 @@ function loadReviews(){
     let html='';
     reviews.forEach(review=>{
         const stars='⭐'.repeat(review.rating);
+        let repliesHtml='';
+        
+        if(review.replies && review.replies.length>0){
+            repliesHtml='<div class="replies-section">';
+            review.replies.forEach(reply=>{
+                repliesHtml+=`
+                    <div class="reply-card">
+                        <div class="reply-header">
+                            <div>
+                                <span class="reply-author">${reply.author}</span>
+                                <span class="creator-badge">Creator</span>
+                            </div>
+                            <span class="review-date">${reply.date}</span>
+                        </div>
+                        <div class="reply-text">${reply.text}</div>
+                    </div>
+                `;
+            });
+            repliesHtml+='</div>';
+        }
+        
+        let replyFormHtml='';
+        if(isAdmin){
+            replyFormHtml=`
+                <div style="margin-top:15px;padding-top:15px;border-top:1px solid rgba(124,58,237,0.2);">
+                    <form onsubmit="submitReply(event, ${review.id})">
+                        <div class="form-group">
+                            <textarea id="reply-text-${review.id}" placeholder="Odpowiedź od administratora..." required maxlength="300" style="min-height:80px;"></textarea>
+                        </div>
+                        <button type="submit" class="reply-btn">📤 Odpowiedz</button>
+                    </form>
+                </div>
+            `;
+        }
+        
         html+=`
             <div class="review-card">
                 <div class="review-header">
-                    <div>
-                        <div class="review-author">${review.author}</div>
-                        <div class="review-date">${review.date}</div>
+                    <div class="review-author-section">
+                        <div>
+                            <div class="review-author">${review.author}</div>
+                            <div class="review-date">${review.date}</div>
+                        </div>
                     </div>
-                    ${isAdmin?`<button class="delete-btn" onclick="deleteReview(${review.id})">Usuń</button>`:''}
+                    ${isAdmin?`<button class="delete-btn" onclick="deleteReview(${review.id})">🗑️ Usuń</button>`:''}
                 </div>
                 <div class="review-rating">${stars}</div>
                 <div class="review-text">${review.text}</div>
+                ${repliesHtml}
+                ${replyFormHtml}
             </div>
         `;
     });
     
-    document.getElementById('all-reviews-list').innerHTML=html||'<p style="color:#64748b;">Brak opinii. Bądź pierwszy!</p>';
-    document.getElementById('reviews-list').innerHTML=html.slice(0,html.lastIndexOf('<div')||0)+'</div>';
+    const allReviewsHtml=html;
+    document.getElementById('all-reviews-list').innerHTML=allReviewsHtml||'<p style="color:#64748b;text-align:center;">Brak opinii. Bądź pierwszy!</p>';
+    
+    // Pokaż tylko 3 ostatnie opinie na stronie głównej
+    const lastThreeReviews=reviews.slice(-3).reverse().map(review=>{
+        const stars='⭐'.repeat(review.rating);
+        let repliesHtml='';
+        
+        if(review.replies && review.replies.length>0){
+            repliesHtml='<div class="replies-section">';
+            review.replies.forEach(reply=>{
+                repliesHtml+=`
+                    <div class="reply-card">
+                        <div class="reply-header">
+                            <div>
+                                <span class="reply-author">${reply.author}</span>
+                                <span class="creator-badge">Creator</span>
+                            </div>
+                            <span class="review-date">${reply.date}</span>
+                        </div>
+                        <div class="reply-text">${reply.text}</div>
+                    </div>
+                `;
+            });
+            repliesHtml+='</div>';
+        }
+        
+        return `
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-author-section">
+                        <div>
+                            <div class="review-author">${review.author}</div>
+                            <div class="review-date">${review.date}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="review-rating">${stars}</div>
+                <div class="review-text">${review.text}</div>
+                ${repliesHtml}
+            </div>
+        `;
+    }).join('');
+    
+    document.getElementById('reviews-list').innerHTML=lastThreeReviews||'<p style="color:#64748b;text-align:center;">Brak opinii. Bądź pierwszy!</p>';
 }
 
 function deleteReview(id){
@@ -1070,8 +1363,15 @@ function deleteReview(id){
     loadReviews();
 }
 
-function showAllReviewsAdmin(){
-    alert('Panel admina - zarządzaj opiniami z listy powyżej (przycisk Usuń)');
+function exportReviews(){
+    const reviews=JSON.parse(localStorage.getItem('reviews')||'[]');
+    const dataStr=JSON.stringify(reviews, null, 2);
+    const dataBlob=new Blob([dataStr], {type:'application/json'});
+    const url=URL.createObjectURL(dataBlob);
+    const link=document.createElement('a');
+    link.href=url;
+    link.download=`clearnix-reviews-${new Date().toISOString().split('T')[0]}.json`;
+    link.click();
 }
 
 // POBIERANIE
@@ -1126,6 +1426,10 @@ function goToHome(){
 }
 
 function goToReviews(){
+    if(!currentUser){
+        openLoginModal();
+        return;
+    }
     document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
     document.getElementById('reviews-page').classList.add('active');
     loadReviews();
@@ -1182,14 +1486,19 @@ support:"Wesprzyj nas",
 'nav-home':"Home",
 'nav-reviews':"Opinie",
 'back-home':"← Wróć",
-'login-title':"Zaloguj się aby dodać opinię",
-'google-login':"🔐 Zaloguj się przez Google",
+'modal-title':"Zaloguj się",
+'modal-desc':"Musisz się zalogować aby dodać opinię",
+'or-text':"— LUB —",
+'simple-login-btn':"📧 Zaloguj się emailem",
 'rating-label':"Ocena:",
 'opinion-label':"Twoja opinia:",
 'submit-btn':"Wyślij opinię",
 'reviews-page-title':"Dodaj opinię",
 'all-reviews-title':"Wszystkie opinie",
-'logged-user':"Zalogowany jako:"
+'logged-user':"Zalogowany jako:",
+'logout-btn':"Wyloguj",
+'login-prompt-title':"Zaloguj się aby dodać opinię",
+'open-login-btn':"🔐 Zaloguj się"
 },
 en:{
 title:"Optimize your Windows like a pro",
@@ -1205,14 +1514,19 @@ support:"Support us",
 'nav-home':"Home",
 'nav-reviews':"Reviews",
 'back-home':"← Back",
-'login-title':"Sign in to add a review",
-'google-login':"🔐 Sign in with Google",
+'modal-title':"Sign in",
+'modal-desc':"You must sign in to add a review",
+'or-text':"— OR —",
+'simple-login-btn':"📧 Sign in with email",
 'rating-label':"Rating:",
 'opinion-label':"Your opinion:",
 'submit-btn':"Submit Review",
 'reviews-page-title':"Add a Review",
 'all-reviews-title':"All Reviews",
-'logged-user':"Logged in as:"
+'logged-user':"Logged in as:",
+'logout-btn':"Sign out",
+'login-prompt-title':"Sign in to add a review",
+'open-login-btn':"🔐 Sign in"
 },
 de:{
 title:"Optimieren Sie Windows wie ein Profi",
@@ -1228,14 +1542,19 @@ support:"Unterstützen Sie uns",
 'nav-home':"Startseite",
 'nav-reviews':"Bewertungen",
 'back-home':"← Zurück",
-'login-title':"Melden Sie sich an, um eine Bewertung abzugeben",
-'google-login':"🔐 Mit Google anmelden",
+'modal-title':"Anmelden",
+'modal-desc':"Sie müssen sich anmelden, um eine Bewertung abzugeben",
+'or-text':"— ODER —",
+'simple-login-btn':"📧 Mit E-Mail anmelden",
 'rating-label':"Bewertung:",
 'opinion-label':"Deine Meinung:",
 'submit-btn':"Bewertung einreichen",
 'reviews-page-title':"Bewertung abgeben",
 'all-reviews-title':"Alle Bewertungen",
-'logged-user':"Angemeldet als:"
+'logged-user':"Angemeldet als:",
+'logout-btn':"Abmelden",
+'login-prompt-title':"Melden Sie sich an, um eine Bewertung abzugeben",
+'open-login-btn':"🔐 Anmelden"
 },
 ru:{
 title:"Оптимизируй Windows как профи",
@@ -1251,21 +1570,26 @@ support:"Поддержать",
 'nav-home':"Главная",
 'nav-reviews':"Отзывы",
 'back-home':"← Назад",
-'login-title':"Войдите, чтобы добавить отзыв",
-'google-login':"🔐 Войти через Google",
+'modal-title':"Вход",
+'modal-desc':"Вы должны войти, чтобы добавить отзыв",
+'or-text':"— ИЛИ —",
+'simple-login-btn':"📧 Вход по email",
 'rating-label':"Оценка:",
 'opinion-label':"Ваше мнение:",
 'submit-btn':"Отправить отзыв",
 'reviews-page-title':"Добавить отзыв",
 'all-reviews-title':"Все отзывы",
-'logged-user':"Авторизован как:"
+'logged-user':"Авторизован как:",
+'logout-btn':"Выход",
+'login-prompt-title':"Войдите, чтобы добавить отзыв",
+'open-login-btn':"🔐 Вход"
 },
 ua:{
 title:"Оптимізуй Windows як профі",
 desc:"Збільш FPS та прискор систему.",
 download:"⬇ Завантажити",
 how:"Як це працює",
-c1:"⚡ Оп��имізація ПК",
+c1:"⚡ Оптимізація ПК",
 c2:"🌐 Оптимізація інтернету",
 c3:"🧹 Очищення файлів",
 support:"Підтримати",
@@ -1274,14 +1598,19 @@ support:"Підтримати",
 'nav-home':"Головна",
 'nav-reviews':"Відгуки",
 'back-home':"← Назад",
-'login-title':"Увійдіть, щоб залишити відгук",
-'google-login':"🔐 Увійти через Google",
+'modal-title':"Вхід",
+'modal-desc':"Ви повинні увійти, щоб залишити відгук",
+'or-text':"— АБО —",
+'simple-login-btn':"📧 Вхід через email",
 'rating-label':"Оцінка:",
 'opinion-label':"Ваша думка:",
 'submit-btn':"Надіслати відгук",
 'reviews-page-title':"Додати відгук",
 'all-reviews-title':"Усі відгуки",
-'logged-user':"Авторизовано як:"
+'logged-user':"Авторизовано як:",
+'logout-btn':"Вихід",
+'login-prompt-title':"Увійдіть, щоб залишити відгук",
+'open-login-btn':"🔐 Вхід"
 },
 es:{
 title:"Optimiza Windows como un profesional",
@@ -1297,14 +1626,19 @@ support:"Apóyanos",
 'nav-home':"Inicio",
 'nav-reviews':"Opiniones",
 'back-home':"← Atrás",
-'login-title':"Inicia sesión para agregar una opinión",
-'google-login':"🔐 Iniciar sesión con Google",
+'modal-title':"Iniciar sesión",
+'modal-desc':"Debe iniciar sesión para agregar una opinión",
+'or-text':"— O —",
+'simple-login-btn':"📧 Iniciar sesión con email",
 'rating-label':"Calificación:",
 'opinion-label':"Tu opinión:",
 'submit-btn':"Enviar opinión",
 'reviews-page-title':"Agregar opinión",
 'all-reviews-title':"Todas las opiniones",
-'logged-user':"Autenticado como:"
+'logged-user':"Autenticado como:",
+'logout-btn':"Cerrar sesión",
+'login-prompt-title':"Inicie sesión para agregar una opinión",
+'open-login-btn':"🔐 Iniciar sesión"
 }
 };
 
@@ -1325,13 +1659,18 @@ function changeLang(lang){
     document.getElementById("nav-reviews").innerText=t['nav-reviews'];
     document.getElementById("back-home").innerText=t['back-home'];
     document.getElementById("back-reviews").innerText=t['back-home'];
-    document.getElementById("login-title").innerText=t['login-title'];
-    document.getElementById("google-login-btn").innerText=t['google-login'];
+    document.getElementById("modal-title").innerText=t['modal-title'];
+    document.getElementById("modal-desc").innerText=t['modal-desc'];
+    document.getElementById("or-text").innerText=t['or-text'];
+    document.getElementById("simple-login-btn").innerText=t['simple-login-btn'];
     document.getElementById("rating-label").innerText=t['rating-label'];
     document.getElementById("opinion-label").innerText=t['opinion-label'];
     document.getElementById("submit-btn").innerText=t['submit-btn'];
     document.getElementById("reviews-page-title").innerText=t['reviews-page-title'];
     document.getElementById("all-reviews-title").innerText=t['all-reviews-title'];
+    document.getElementById("logout-btn").innerText=t['logout-btn'];
+    document.getElementById("login-prompt-title").innerText=t['login-prompt-title'];
+    document.getElementById("open-login-btn").innerText=t['open-login-btn'];
 }
 
 // INICJALIZACJA
@@ -1340,9 +1679,20 @@ window.addEventListener('load',()=>{
     loadReviews();
     
     // Licznik znaków w opinii
-    document.getElementById('opinion').addEventListener('input',function(){
-        document.getElementById('char-count').innerText=this.value.length+'/500';
-    });
+    const opinionField=document.getElementById('opinion');
+    if(opinionField){
+        opinionField.addEventListener('input',function(){
+            document.getElementById('char-count').innerText=this.value.length+'/500';
+        });
+    }
+    
+    // Close modal when clicking outside
+    window.onclick=function(event){
+        const modal=document.getElementById('login-modal');
+        if(event.target===modal){
+            closeLoginModal();
+        }
+    }
 });
 
 </script>
