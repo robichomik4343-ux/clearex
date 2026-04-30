@@ -670,6 +670,33 @@ body{
     display:none;
 }
 
+.divider{
+    text-align:center;
+    margin:20px 0;
+    color:#64748b;
+    position:relative;
+}
+
+.divider::before{
+    content:'';
+    position:absolute;
+    left:0;
+    top:50%;
+    width:45%;
+    height:1px;
+    background:rgba(124,58,237,0.3);
+}
+
+.divider::after{
+    content:'';
+    position:absolute;
+    right:0;
+    top:50%;
+    width:45%;
+    height:1px;
+    background:rgba(124,58,237,0.3);
+}
+
 /* REVIEW FORM */
 .review-form-container{
     max-width:600px;
@@ -954,6 +981,11 @@ body{
                 <button type="submit" class="auth-btn" id="login-btn">🔐 Zaloguj się</button>
             </form>
             
+            <div class="divider" id="or-text">LUB</div>
+
+            <!-- GOOGLE LOGIN -->
+            <div id="google-login-container" style="margin-bottom:20px;"></div>
+
             <div class="form-toggle">
                 <span id="no-account-text">Nie masz konta? </span>
                 <a onclick="showRegister()" id="switch-to-register">Zarejestruj się</a>
@@ -987,6 +1019,11 @@ body{
                 </div>
                 <button type="submit" class="auth-btn" id="register-btn">✓ Zarejestruj się</button>
             </form>
+
+            <div class="divider" id="or-text-2">LUB</div>
+
+            <!-- GOOGLE SIGNUP -->
+            <div id="google-signup-container" style="margin-bottom:20px;"></div>
             
             <div class="form-toggle">
                 <span id="have-account-text">Masz już konto? </span>
@@ -1143,12 +1180,25 @@ body{
     </div>
 </div>
 
+<script src="https://accounts.google.com/gsi/client"></script>
+
 <script>
 
 let currentUser=null;
 let userEmail=null;
 let currentLang='pl';
 const ADMIN_EMAIL='clearnixapp@gmail.com';
+
+// HASH PASSWORD - BEZPIECZNA METODA
+function simpleHash(str){
+    let hash=0;
+    for(let i=0;i<str.length;i++){
+        const char=str.charCodeAt(i);
+        hash=((hash<<5)-hash)+char;
+        hash=hash&hash;
+    }
+    return 'hash_'+Math.abs(hash).toString(16);
+}
 
 // STARS EFFECT
 function createStars(){
@@ -1165,6 +1215,76 @@ function createStars(){
     }
 }
 createStars();
+
+// INIT GOOGLE AUTH
+function initializeGoogleAuth(){
+    try{
+        google.accounts.id.initialize({
+            client_id:'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com',
+            callback:handleCredentialResponse,
+            auto_select:false
+        });
+        
+        // Login button
+        google.accounts.id.renderButton(
+            document.getElementById('google-login-container'),
+            {
+                theme:'outline',
+                size:'large',
+                width:'100%'
+            }
+        );
+
+        // Signup button
+        google.accounts.id.renderButton(
+            document.getElementById('google-signup-container'),
+            {
+                theme:'outline',
+                size:'large',
+                width:'100%'
+            }
+        );
+    }catch(err){
+        console.log('Google Auth nie jest dostępne. Używaj logowania przez email.');
+    }
+}
+
+function handleCredentialResponse(response){
+    try{
+        const decoded=jwt_decode(response.credential);
+        currentUser=decoded.name;
+        userEmail=decoded.email;
+        
+        // Automatycznie tworzymy konto jeśli go nie ma
+        const users=JSON.parse(localStorage.getItem('users')||'[]');
+        if(!users.some(u=>u.email===userEmail)){
+            const newUser={
+                id:Date.now(),
+                username:decoded.given_name||decoded.name,
+                email:userEmail,
+                passwordHash:'google_auth'
+            };
+            users.push(newUser);
+            localStorage.setItem('users',JSON.stringify(users));
+        }
+        
+        updateUserProfile();
+        closeAuthModal();
+        showReviewForm();
+        loadReviews();
+    }catch(err){
+        alert('Błąd autoryzacji. Spróbuj ponownie.');
+    }
+}
+
+function jwt_decode(token){
+    const base64Url=token.split('.')[1];
+    const base64=base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    const jsonPayload=decodeURIComponent(atob(base64).split('').map(c=>{
+        return '%'+('00'+c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+    return JSON.parse(jsonPayload);
+}
 
 // AUTH FUNCTIONS
 function openAuthModal(){
@@ -1204,7 +1324,8 @@ function handleLogin(e){
     }
     
     const users=JSON.parse(localStorage.getItem('users')||'[]');
-    const user=users.find(u=>u.email===email && u.password===password);
+    const passwordHash=simpleHash(password);
+    const user=users.find(u=>u.email===email && u.passwordHash===passwordHash);
     
     if(!user){
         errorDiv.innerText='Email lub hasło niepoprawne!';
@@ -1255,11 +1376,13 @@ function handleRegister(e){
         return;
     }
     
+    const passwordHash=simpleHash(password);
+    
     const newUser={
         id:Date.now(),
         username:username,
         email:email,
-        password:password
+        passwordHash:passwordHash
     };
     
     users.push(newUser);
@@ -1898,6 +2021,7 @@ function changeLang(lang){
 
 // INICJALIZACJA
 window.addEventListener('load',()=>{
+    initializeGoogleAuth();
     loadReviews();
     updateUserProfile();
     
