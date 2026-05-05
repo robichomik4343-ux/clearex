@@ -5,12 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Clearnix</title>
 
-<!-- FAVICON - Dodane -->
-<link rel="icon" type="image/png" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23000000'/%3E%3Ccircle cx='50' cy='50' r='30' fill='%237c3aed'/%3E%3Ctext x='50' y='67' text-anchor='middle' fill='white' font-size='40' font-weight='bold' font-family='Arial'%3EC%3C/text%3E%3C/svg%3E">
-<link rel="shortcut icon" type="image/png" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23000000'/%3E%3Ccircle cx='50' cy='50' r='30' fill='%237c3aed'/%3E%3Ctext x='50' y='67' text-anchor='middle' fill='white' font-size='40' font-weight='bold' font-family='Arial'%3EC%3C/text%3E%3C/svg%3E">
-<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23000000'/%3E%3Ccircle cx='50' cy='50' r='30' fill='%237c3aed'/%3E%3Ctext x='50' y='67' text-anchor='middle' fill='white' font-size='40' font-weight='bold' font-family='Arial'%3EC%3C/text%3E%3C/svg%3E">
-<!-- Koniec favicon -->
-
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 
@@ -1102,4 +1096,1122 @@ body{
         <div id="user-profile" style="display:none;color:#7c3aed;font-weight:700;display:flex;align-items:center;gap:15px;">
             <img id="profile-avatar" style="width:40px;height:40px;border-radius:50%;border:2px solid #7c3aed;object-fit:cover;">
             <span id="profile-username"></span>
-            <button onclick="logout()" id="logout-btn" style="background:#ef4444;color:white;border:none;padding:8px 16px;border-radius:8px;cursor:pointer;font
+            <button onclick="logout()" id="logout-btn" style="background:#ef4444;color:white;border:none;padding:8px 16px;border-radius:8px;cursor:pointer;font-weight:600;">Wyloguj</button>
+        </div>
+
+        <div class="lang">
+            <select onchange="changeLang(this.value)">
+                <option value="pl">🇵🇱 PL</option>
+                <option value="en">🇬🇧 EN</option>
+                <option value="de">🇩🇪 DE</option>
+                <option value="ru">🇷🇺 RU</option>
+                <option value="ua">���🇦 UA</option>
+                <option value="es">🇪🇸 ES</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<!-- HOME PAGE -->
+<div id="home-page" class="page active">
+    <section class="hero">
+        <div class="hero-content">
+            <h1 id="title">Optymalizuj Windows jak profesjonalista</h1>
+            <p id="desc">Zwiększ FPS, usuń lagi i przyspiesz system.</p>
+
+            <button class="download-btn" onclick="startDownload()" id="download-btn">
+                ⬇ Pobierz
+            </button>
+
+            <div id="download-status"></div>
+        </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="section" id="how">
+        <h2 id="how-title">Jak to działa</h2>
+
+        <div class="grid">
+            <div class="card" onclick="goToFeature('cleaning')">
+                <div class="card-content" id="c1">⚡ Optymalizuje komputer</div>
+            </div>
+            <div class="card" onclick="goToFeature('internet')">
+                <div class="card-content" id="c2">🌐 Optymalizuje internet</div>
+            </div>
+            <div class="card" onclick="goToFeature('cache')">
+                <div class="card-content" id="c3">🧹 Czyści niepotrzebne pliki</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- REVIEWS -->
+    <div class="reviews-section" id="reviews-main">
+        <h2 id="reviews-title">Opinie użytkowników</h2>
+        <div class="reviews-container" id="reviews-list"></div>
+        <button class="review-btn" onclick="goToReviews()" id="add-review-btn">💬 Dodaj opinię</button>
+    </div>
+
+    <!-- SUPPORT -->
+    <div class="support">
+        <h3 id="support-text">Wesprzyj nas</h3>
+        <a href="https://tipply.pl/@anarchiczny_2" target="_blank">💝 Tipply</a>
+    </div>
+</div>
+
+<!-- FEATURE PAGE -->
+<div id="feature-page" class="page">
+    <div class="feature-page">
+        <button class="back-btn" onclick="goToHome()" id="back-home">← Wróć</button>
+        
+        <h1 id="feature-title">Czyszczenie systemu</h1>
+        <p id="feature-description">Aplikacja czysci nie potrzebne pliki systemowe i przegladarkowe takie jak pliki cache</p>
+        
+        <div class="feature-details">
+            <ul id="feature-list">
+                <li>Usuwanie plików cache</li>
+                <li>Czyszczenie pamięci tymczasowej</li>
+                <li>Optymalizacja systemu plików</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- REVIEWS PAGE -->
+<div id="reviews-page" class="page">
+    <div style="min-height:100vh;padding-top:120px;padding-bottom:50px;">
+        <button class="back-btn" onclick="goToHome()" id="back-reviews">← Wróć</button>
+        
+        <h2 id="reviews-page-title" style="font-size:45px;margin-bottom:50px;background:linear-gradient(135deg, #ffffff 0%, #7c3aed 50%, #ec4899 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Dodaj opinię</h2>
+
+        <!-- REVIEW FORM (hidden until login) -->
+        <div id="review-form-section" class="review-form-container" style="display:none;">
+            <div style="margin-bottom:20px;padding:15px;background:rgba(124,58,237,0.2);border-radius:10px;display:flex;align-items:center;gap:15px;">
+                <img id="form-avatar" style="width:50px;height:50px;border-radius:50%;border:2px solid #7c3aed;object-fit:cover;">
+                <div style="text-align:left;">
+                    <p id="logged-user" style="color:#cbd5e1;margin-bottom:8px;"></p>
+                    <button onclick="logout()" style="background:#ef4444;color:white;border:none;padding:6px 12px;border-radius:6px;cursor:pointer;font-weight:600;font-size:12px;">Wyloguj</button>
+                </div>
+            </div>
+            
+            <form onsubmit="submitReview(event)">
+                <div class="form-group">
+                    <label id="rating-label">Ocena:</label>
+                    <select id="rating" required>
+                        <option value="">Wybierz ocenę</option>
+                        <option value="5">⭐⭐⭐⭐⭐ - Świetnie!</option>
+                        <option value="4">⭐⭐⭐⭐ - Dobrze</option>
+                        <option value="3">⭐⭐⭐ - OK</option>
+                        <option value="2">⭐⭐ - Źle</option>
+                        <option value="1">⭐ - Bardzo źle</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label id="opinion-label">Twoja opinia:</label>
+                    <textarea id="opinion" placeholder="Napisz co myślisz o aplikacji..." required maxlength="500"></textarea>
+                    <small id="char-count" style="color:#64748b;display:block;margin-top:5px;">0/500</small>
+                </div>
+
+                <button type="submit" class="review-btn submit-review-btn" id="submit-btn">Wyślij opinię</button>
+            </form>
+        </div>
+
+        <!-- LOGIN PROMPT -->
+        <div id="login-prompt" class="review-form-container">
+            <h3 id="login-prompt-title">Zaloguj się aby dodać opinię</h3>
+            <button class="review-btn" onclick="openAuthModal()" id="open-login-btn">🔐 Zaloguj się</button>
+        </div>
+
+        <!-- ALL REVIEWS -->
+        <div style="margin-top:60px;max-width:900px;margin-left:auto;margin-right:auto;">
+            <h3 id="all-reviews-title" style="font-size:32px;margin-bottom:40px;text-align:center;color:#cbd5e1;">Wszystkie opinie</h3>
+            <div id="all-reviews-list"></div>
+        </div>
+
+        <!-- ADMIN SECTION -->
+        <div id="admin-section" class="admin-section">
+            <h3>👑 Panel Administratora</h3>
+            <p id="admin-info"></p>
+            <button onclick="exportReviews()" style="background:#7c3aed;color:white;border:none;padding:10px 20px;border-radius:8px;cursor:pointer;font-weight:600;margin:5px;">📥 Eksportuj opinie</button>
+        </div>
+    </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics-compat.js"></script>
+
+<script>
+
+let currentUser=null;
+let userEmail=null;
+let userAvatar=null;
+let currentLang='pl';
+const ADMIN_EMAIL='clearnixapp@gmail.com';
+let firebaseAuth=null;
+
+const firebaseConfig={
+    apiKey:'AIzaSyCrjiaglCiMWpoO_XQ6IGQWBgfgFrAISmw',
+    authDomain:'clearnix-e7522.firebaseapp.com',
+    projectId:'clearnix-e7522',
+    storageBucket:'clearnix-e7522.firebasestorage.app',
+    messagingSenderId:'120883670456',
+    appId:'1:120883670456:web:f14abc3301702f867ff34d',
+    measurementId:'G-8V9NRVY477'
+};
+
+// HASH PASSWORD - BEZPIECZNA METODA
+function simpleHash(str){
+    let hash=0;
+    for(let i=0;i<str.length;i++){
+        const char=str.charCodeAt(i);
+        hash=((hash<<5)-hash)+char;
+        hash=hash&hash;
+    }
+    return 'hash_'+Math.abs(hash).toString(16);
+}
+
+// STARS EFFECT
+function createStars(){
+    const starsContainer=document.querySelector('.orb-container');
+    for(let i=0;i<50;i++){
+        const star=document.createElement('div');
+        star.className='star';
+        star.style.width=Math.random()*2+1+'px';
+        star.style.height=star.style.width;
+        star.style.left=Math.random()*100+'%';
+        star.style.top=Math.random()*100+'%';
+        star.style.animationDelay=Math.random()*4+'s';
+        starsContainer.appendChild(star);
+    }
+}
+createStars();
+
+// INIT FIREBASE + GOOGLE AUTH
+function initializeFirebase(){
+    try{
+        if(!firebase.apps.length){
+            firebase.initializeApp(firebaseConfig);
+        }
+        firebaseAuth=firebase.auth();
+        try{
+            firebase.analytics();
+        }catch(analyticsErr){
+            console.log('Analytics niedostępne:', analyticsErr);
+        }
+
+        firebaseAuth.onAuthStateChanged((user)=>{
+            if(user){
+                applyGoogleUser(user);
+            }
+        });
+    }catch(err){
+        console.log('Błąd inicjalizacji Firebase:', err);
+    }
+}
+
+function initializeGoogleAuth(){
+    try{
+        const loginContainer=document.getElementById('google-login-container');
+        const signupContainer=document.getElementById('google-signup-container');
+
+        if(loginContainer){
+            loginContainer.innerHTML='<button type="button" class="auth-btn" onclick="signInWithGoogle()">🔵 Kontynuuj z Google</button>';
+        }
+        if(signupContainer){
+            signupContainer.innerHTML='<button type="button" class="auth-btn" onclick="signInWithGoogle()">🔵 Kontynuuj z Google</button>';
+        }
+    }catch(err){
+        console.log('Błąd przygotowania przycisków Google:', err);
+    }
+}
+
+function signInWithGoogle(){
+    const loginError=document.getElementById('login-error');
+    const registerError=document.getElementById('register-error');
+    if(loginError){
+        loginError.innerText='';
+        loginError.style.display='none';
+    }
+    if(registerError){
+        registerError.innerText='';
+        registerError.style.display='none';
+    }
+
+    if(!firebaseAuth){
+        if(loginError){
+            loginError.innerText='Firebase Auth nie jest gotowy. Odśwież stronę i spróbuj ponownie.';
+            loginError.style.display='block';
+        }
+        return;
+    }
+
+    const provider=new firebase.auth.GoogleAuthProvider();
+    provider.setCustomParameters({prompt:'select_account'});
+
+    firebaseAuth.signInWithPopup(provider)
+        .then((result)=>{
+            applyGoogleUser(result.user);
+            closeAuthModal();
+            showReviewForm();
+            loadReviews();
+        })
+        .catch((err)=>{
+            console.log('Błąd logowania Google:', err);
+            const msg='Nie udało się zalogować przez Google. Spróbuj ponownie.';
+            if(loginError){
+                loginError.innerText=msg;
+                loginError.style.display='block';
+            }
+            if(registerError){
+                registerError.innerText=msg;
+                registerError.style.display='block';
+            }
+        });
+}
+
+function applyGoogleUser(user){
+    if(!user){
+        return;
+    }
+
+    const users=JSON.parse(localStorage.getItem('users')||'[]');
+    const existing=users.find(u=>u.email===user.email);
+    const fallbackName=existing&&existing.username?existing.username:null;
+
+    currentUser=user.displayName||fallbackName||user.email||'Użytkownik';
+    userEmail=user.email||null;
+    userAvatar=user.photoURL||'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%237c3aed"%3E%3Cpath d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/%3E%3C/svg%3E';
+
+    // Zachowujemy kompatybilność z istniejącą logiką localStorage.
+    if(!existing){
+        users.push({
+            id:Date.now(),
+            username:currentUser,
+            email:userEmail,
+            avatar:userAvatar,
+            passwordHash:'google_auth'
+        });
+    }else{
+        existing.username=currentUser;
+        existing.avatar=userAvatar;
+    }
+    localStorage.setItem('users',JSON.stringify(users));
+
+    updateUserProfile();
+}
+
+// AUTH FUNCTIONS
+function openAuthModal(){
+    document.getElementById('auth-modal').classList.add('show');
+    showLogin();
+}
+
+function closeAuthModal(){
+    document.getElementById('auth-modal').classList.remove('show');
+    document.getElementById('login-error').innerText='';
+    document.getElementById('register-error').innerText='';
+    document.getElementById('login-form-section').style.display='block';
+    document.getElementById('register-form-section').style.display='none';
+}
+
+function showLogin(){
+    document.getElementById('login-form-section').style.display='block';
+    document.getElementById('register-form-section').style.display='none';
+}
+
+function showRegister(){
+    document.getElementById('login-form-section').style.display='none';
+    document.getElementById('register-form-section').style.display='block';
+}
+
+// Preview avatara
+document.addEventListener('DOMContentLoaded',()=>{
+    const avatarInput=document.getElementById('register-avatar');
+    if(avatarInput){
+        avatarInput.addEventListener('change',function(){
+            if(this.value){
+                const img=document.getElementById('avatar-preview');
+                img.src=this.value;
+                img.style.display='block';
+            }
+        });
+    }
+});
+
+async function handleLogin(e){
+    e.preventDefault();
+    
+    const email=document.getElementById('login-email').value;
+    const password=document.getElementById('login-password').value;
+    const errorDiv=document.getElementById('login-error');
+    
+    if(password.length<6){
+        errorDiv.innerText='Hasło musi mieć minimum 6 znaków!';
+        errorDiv.style.display='block';
+        return;
+    }
+
+    if(!firebaseAuth){
+        errorDiv.innerText='Firebase Auth nie jest gotowy. Odśwież stronę i spróbuj ponownie.';
+        errorDiv.style.display='block';
+        return;
+    }
+
+    try{
+        const result=await firebaseAuth.signInWithEmailAndPassword(email,password);
+        applyGoogleUser(result.user);
+        closeAuthModal();
+        showReviewForm();
+        loadReviews();
+    }catch(err){
+        console.log('Błąd logowania mail/hasło:', err);
+        if(err&&err.code==='auth/invalid-credential'){
+            errorDiv.innerText='Email lub hasło niepoprawne!';
+        }else if(err&&err.code==='auth/too-many-requests'){
+            errorDiv.innerText='Za dużo prób logowania. Spróbuj ponownie później.';
+        }else{
+            errorDiv.innerText='Nie udało się zalogować. Spróbuj ponownie.';
+        }
+        errorDiv.style.display='block';
+    }
+}
+
+async function handleRegister(e){
+    e.preventDefault();
+    
+    const username=document.getElementById('register-username').value;
+    const email=document.getElementById('register-email').value;
+    const avatar=document.getElementById('register-avatar').value||'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%237c3aed"%3E%3Cpath d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/%3E%3C/svg%3E';
+    const password=document.getElementById('register-password').value;
+    const confirmPassword=document.getElementById('register-confirm-password').value;
+    const errorDiv=document.getElementById('register-error');
+    const successDiv=document.getElementById('register-success');
+    
+    errorDiv.innerText='';
+    errorDiv.style.display='none';
+    successDiv.innerText='';
+    successDiv.style.display='none';
+    
+    if(password.length<6){
+        errorDiv.innerText='Hasło musi mieć minimum 6 znaków!';
+        errorDiv.style.display='block';
+        return;
+    }
+    
+    if(password!==confirmPassword){
+        errorDiv.innerText='Hasła nie pasują do siebie!';
+        errorDiv.style.display='block';
+        return;
+    }
+
+    if(!firebaseAuth){
+        errorDiv.innerText='Firebase Auth nie jest gotowy. Odśwież stronę i spróbuj ponownie.';
+        errorDiv.style.display='block';
+        return;
+    }
+
+    try{
+        const result=await firebaseAuth.createUserWithEmailAndPassword(email,password);
+        if(result.user){
+            await result.user.updateProfile({
+                displayName:username,
+                photoURL:avatar
+            });
+            applyGoogleUser(result.user);
+        }
+
+        successDiv.innerText='✓ Konto zostało stworzone!';
+        successDiv.style.display='block';
+        closeAuthModal();
+        showReviewForm();
+        loadReviews();
+    }catch(err){
+        console.log('Błąd rejestracji mail/hasło:', err);
+        if(err&&err.code==='auth/email-already-in-use'){
+            errorDiv.innerText='Ten email jest już zarejestrowany!';
+        }else if(err&&err.code==='auth/invalid-email'){
+            errorDiv.innerText='Podaj poprawny adres email.';
+        }else if(err&&err.code==='auth/weak-password'){
+            errorDiv.innerText='Hasło jest za słabe.';
+        }else{
+            errorDiv.innerText='Nie udało się utworzyć konta. Spróbuj ponownie.';
+        }
+        errorDiv.style.display='block';
+    }
+}
+
+function updateUserProfile(){
+    if(currentUser && userEmail){
+        document.getElementById('user-profile').style.display='flex';
+        document.getElementById('profile-username').innerText=`✓ ${currentUser}`;
+        document.getElementById('profile-avatar').src=userAvatar;
+    } else {
+        document.getElementById('user-profile').style.display='none';
+    }
+}
+
+function logout(){
+    if(firebaseAuth && firebaseAuth.currentUser){
+        firebaseAuth.signOut().catch((err)=>{
+            console.log('Błąd wylogowania Firebase:', err);
+        });
+    }
+    currentUser=null;
+    userEmail=null;
+    userAvatar=null;
+    updateUserProfile();
+    document.getElementById('login-prompt').style.display='block';
+    document.getElementById('review-form-section').style.display='none';
+    document.getElementById('admin-section').classList.remove('show');
+    document.getElementById('rating').value='';
+    document.getElementById('opinion').value='';
+    loadReviews();
+}
+
+function showReviewForm(){
+    document.getElementById('login-prompt').style.display='none';
+    document.getElementById('review-form-section').style.display='block';
+    document.getElementById('logged-user').innerText=`✓ Zalogowany jako: ${currentUser}`;
+    document.getElementById('form-avatar').src=userAvatar;
+    
+    if(userEmail===ADMIN_EMAIL){
+        document.getElementById('admin-section').classList.add('show');
+    }
+}
+
+function submitReview(e){
+    e.preventDefault();
+    
+    if(!currentUser || !userEmail){
+        alert('Musisz się zalogować!');
+        return;
+    }
+    
+    const rating=document.getElementById('rating').value;
+    const opinion=document.getElementById('opinion').value;
+    
+    if(!rating || !opinion){
+        alert('Wypełnij wszystkie pola!');
+        return;
+    }
+    
+    const reviews=JSON.parse(localStorage.getItem('reviews')||'[]');
+    if(reviews.some(r=>r.email===userEmail)){
+        alert('Już dodałeś opinię! Każdy użytkownik może dodać max. 1 opinię.');
+        return;
+    }
+    
+    const review={
+        id:Date.now(),
+        author:currentUser,
+        email:userEmail,
+        avatar:userAvatar,
+        rating:parseInt(rating),
+        text:opinion,
+        date:new Date().toLocaleDateString('pl-PL'),
+        approved:true,
+        replies:[]
+    };
+    
+    reviews.push(review);
+    localStorage.setItem('reviews',JSON.stringify(reviews));
+    
+    alert('Dziękuję za opinię!');
+    document.getElementById('rating').value='';
+    document.getElementById('opinion').value='';
+    document.getElementById('char-count').innerText='0/500';
+    
+    loadReviews();
+}
+
+function submitReply(e,reviewId){
+    e.preventDefault();
+    
+    if(userEmail!==ADMIN_EMAIL){
+        alert('Tylko admin może odpowiadać!');
+        return;
+    }
+    
+    const replyText=document.getElementById(`reply-text-${reviewId}`).value;
+    if(!replyText.trim()){
+        alert('Wpisz odpowiedź!');
+        return;
+    }
+    
+    let reviews=JSON.parse(localStorage.getItem('reviews')||'[]');
+    const review=reviews.find(r=>r.id===reviewId);
+    
+    if(review){
+        if(!review.replies) review.replies=[];
+        review.replies.push({
+            author:'Clearnix Creator',
+            avatar:'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%2306b6d4"%3E%3Cpath d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/%3E%3C/svg%3E',
+            text:replyText,
+            date:new Date().toLocaleDateString('pl-PL')
+        });
+        localStorage.setItem('reviews',JSON.stringify(reviews));
+        loadReviews();
+    }
+}
+
+function loadReviews(){
+    const reviews=JSON.parse(localStorage.getItem('reviews')||'[]');
+    const isAdmin=userEmail===ADMIN_EMAIL;
+    
+    let html='';
+    reviews.forEach(review=>{
+        const stars='⭐'.repeat(review.rating);
+        let repliesHtml='';
+        
+        if(review.replies && review.replies.length>0){
+            repliesHtml='<div class="replies-section">';
+            review.replies.forEach(reply=>{
+                repliesHtml+=`
+                    <div class="reply-card">
+                        <img src="${reply.avatar}" class="reply-avatar" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%2306b6d4%22%3E%3Cpath d=%22M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z%22/%3E%3C/svg%3E'">
+                        <div class="reply-content">
+                            <div class="reply-header">
+                                <div>
+                                    <span class="reply-author">${reply.author}</span>
+                                    <span class="creator-badge">Creator</span>
+                                </div>
+                                <span class="reply-date">${reply.date}</span>
+                            </div>
+                            <div class="reply-text">${reply.text}</div>
+                        </div>
+                    </div>
+                `;
+            });
+            repliesHtml+='</div>';
+        }
+        
+        let replyFormHtml='';
+        if(isAdmin){
+            replyFormHtml=`
+                <div style="margin-top:15px;padding-top:15px;border-top:1px solid rgba(124,58,237,0.2);">
+                    <form onsubmit="submitReply(event, ${review.id})">
+                        <div class="form-group">
+                            <textarea id="reply-text-${review.id}" placeholder="Odpowiedź od administratora..." required maxlength="300" style="min-height:80px;"></textarea>
+                        </div>
+                        <button type="submit" class="reply-btn">📤 Odpowiedz</button>
+                    </form>
+                </div>
+            `;
+        }
+        
+        html+=`
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-author-section">
+                        <img src="${review.avatar}" class="user-avatar" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%237c3aed%22%3E%3Cpath d=%22M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z%22/%3E%3C/svg%3E'">
+                        <div class="review-info">
+                            <div class="review-author">${review.author}</div>
+                            <div class="review-date">${review.date}</div>
+                        </div>
+                    </div>
+                    ${isAdmin?`<button class="delete-btn" onclick="deleteReview(${review.id})">🗑️ Usuń</button>`:''}
+                </div>
+                <div class="review-rating">${stars}</div>
+                <div class="review-text">${review.text}</div>
+                ${repliesHtml}
+                ${replyFormHtml}
+            </div>
+        `;
+    });
+    
+    const allReviewsHtml=html;
+    document.getElementById('all-reviews-list').innerHTML=allReviewsHtml||'<p style="color:#64748b;text-align:center;">Brak opinii. Bądź pierwszy!</p>';
+    
+    // Pokaż tylko 3 ostatnie opinie na stronie głównej
+    const lastThreeReviews=reviews.slice(-3).reverse().map(review=>{
+        const stars='⭐'.repeat(review.rating);
+        let repliesHtml='';
+        
+        if(review.replies && review.replies.length>0){
+            repliesHtml='<div class="replies-section">';
+            review.replies.forEach(reply=>{
+                repliesHtml+=`
+                    <div class="reply-card">
+                        <img src="${reply.avatar}" class="reply-avatar" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%2306b6d4%22%3E%3Cpath d=%22M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z%22/%3E%3C/svg%3E'">
+                        <div class="reply-content">
+                            <div class="reply-header">
+                                <div>
+                                    <span class="reply-author">${reply.author}</span>
+                                    <span class="creator-badge">Creator</span>
+                                </div>
+                                <span class="reply-date">${reply.date}</span>
+                            </div>
+                            <div class="reply-text">${reply.text}</div>
+                        </div>
+                    </div>
+                `;
+            });
+            repliesHtml+='</div>';
+        }
+        
+        return `
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-author-section">
+                        <img src="${review.avatar}" class="user-avatar" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%237c3aed%22%3E%3Cpath d=%22M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z%22/%3E%3C/svg%3E'">
+                        <div class="review-info">
+                            <div class="review-author">${review.author}</div>
+                            <div class="review-date">${review.date}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="review-rating">${stars}</div>
+                <div class="review-text">${review.text}</div>
+                ${repliesHtml}
+            </div>
+        `;
+    }).join('');
+    
+    document.getElementById('reviews-list').innerHTML=lastThreeReviews||'<p style="color:#64748b;text-align:center;">Brak opinii. Bądź pierwszy!</p>';
+}
+
+function deleteReview(id){
+    if(userEmail!==ADMIN_EMAIL){
+        alert('Nie masz dostępu!');
+        return;
+    }
+    
+    if(!confirm('Usunąć tę opinię?')) return;
+    
+    let reviews=JSON.parse(localStorage.getItem('reviews')||'[]');
+    reviews=reviews.filter(r=>r.id!==id);
+    localStorage.setItem('reviews',JSON.stringify(reviews));
+    loadReviews();
+}
+
+function exportReviews(){
+    const reviews=JSON.parse(localStorage.getItem('reviews')||'[]');
+    const dataStr=JSON.stringify(reviews, null, 2);
+    const dataBlob=new Blob([dataStr], {type:'application/json'});
+    const url=URL.createObjectURL(dataBlob);
+    const link=document.createElement('a');
+    link.href=url;
+    link.download=`clearnix-reviews-${new Date().toISOString().split('T')[0]}.json`;
+    link.click();
+}
+
+// POBIERANIE
+function startDownload(){
+    let btn=document.getElementById("download-btn");
+    let status=document.getElementById("download-status");
+    
+    btn.disabled=true;
+    status.innerText="⬇ Pobieranie...";
+    
+    let progress=0;
+    let interval=setInterval(()=>{
+        progress+=Math.random()*30;
+        if(progress>90) progress=90;
+        status.innerText=`⬇ Pobieranie... ${Math.floor(progress)}%`;
+    }, 300);
+    
+    setTimeout(()=>{
+        clearInterval(interval);
+        
+        const link=document.createElement('a');
+        link.href='/clearnix.exe';
+        link.download='Clearnix.exe';
+        
+        fetch(link.href, {method:'HEAD'})
+            .then(response=>{
+                if(response.ok){
+                    link.click();
+                    status.innerText="✅ Pobieranie ukończone! Plik zapisany.";
+                } else {
+                    status.innerText="⚠️ Plik niedostępny. Spróbuj później.";
+                    btn.disabled=false;
+                }
+            })
+            .catch(()=>{
+                link.click();
+                status.innerText="✅ Pobieranie ukończone! Plik zapisany.";
+            });
+        
+        setTimeout(()=>{
+            btn.disabled=false;
+        }, 3000);
+    }, 3000+Math.random()*2000);
+}
+
+// NAVIGATION
+function goToHome(){
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    document.getElementById('home-page').classList.add('active');
+    loadReviews();
+    window.scrollTo(0,0);
+}
+
+function goToReviews(){
+    if(!currentUser){
+        openAuthModal();
+        return;
+    }
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    document.getElementById('reviews-page').classList.add('active');
+    loadReviews();
+    window.scrollTo(0,0);
+}
+
+function goToFeature(type){
+    const features={
+        cleaning:{
+            title:'Optymalizacja komputera',
+            desc:'Aplikacja optymalizuje działanie Twojego komputera poprzez czyszczenie niepotrzebnych procesów i optymalizację zasobów systemowych.',
+            items:['Zamykanie niepotrzebnych procesów w tle','Optymalizacja pamięci RAM','Czyszczenie rejestru systemu','Przyspieszenie rozruchu systemu']
+        },
+        internet:{
+            title:'Optymalizacja internetu',
+            desc:'Zwiększa szybkość połączenia internetowego poprzez optymalizację ustawień sieciowych i usuwanie bloatware\'u.',
+            items:['Optymalizacja DNS','Przyspieszenie transferu danych','Usunięcie balastowych aplikacji','Zmniejszenie opóźnień (ping)']
+        },
+        cache:{
+            title:'Czyszczenie plików',
+            desc:'Aplikacja czyści nie potrzebne pliki systemowe i przegladarkowe takie jak pliki cache, cookies i pliki tymczasowe.',
+            items:['Usuwanie plików cache','Czyszczenie cookies','Usunięcie plików tymczasowych','Odzyskanie miejsca na dysku']
+        }
+    };
+    
+    const feature=features[type];
+    document.getElementById('feature-title').innerText=feature.title;
+    document.getElementById('feature-description').innerText=feature.desc;
+    
+    let itemsHtml='';
+    feature.items.forEach(item=>{
+        itemsHtml+=`<li>${item}</li>`;
+    });
+    document.getElementById('feature-list').innerHTML=itemsHtml;
+    
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    document.getElementById('feature-page').classList.add('active');
+    window.scrollTo(0,0);
+}
+
+// TRANSLATIONS
+const translations={
+pl:{
+title:"Optymalizuj Windows jak profesjonalista",
+desc:"Zwiększ FPS, usuń lagi i przyspiesz system.",
+download:"⬇ Pobierz",
+how:"Jak to działa",
+c1:"⚡ Optymalizuje komputer",
+c2:"🌐 Optymalizuje internet",
+c3:"🧹 Czyści niepotrzebne pliki",
+support:"Wesprzyj nas",
+'reviews-title':"Opinie użytkowników",
+'add-review':"💬 Dodaj opinię",
+'nav-home':"Home",
+'nav-reviews':"Opinie",
+'back-home':"← Wróć",
+'login-title':"Zaloguj się",
+'login-desc':"Zaloguj się aby dodać opinię",
+'login-email-label':"Email:",
+'login-password-label':"Hasło:",
+'login-btn':"🔐 Zaloguj się",
+'no-account-text':"Nie masz konta?",
+'switch-to-register':"Zarejestruj się",
+'register-title':"Zarejestruj się",
+'register-desc':"Utwórz nowe konto aby dodawać opinie",
+'register-username-label':"Nazwa użytkownika:",
+'register-email-label':"Email:",
+'register-avatar-label':"Avatar:",
+'register-password-label':"Hasło:",
+'register-confirm-label':"Powtórz hasło:",
+'register-btn':"✓ Zarejestruj się",
+'have-account-text':"Masz już konto?",
+'switch-to-login':"Zaloguj się",
+'rating-label':"Ocena:",
+'opinion-label':"Twoja opinia:",
+'submit-btn':"Wyślij opinię",
+'reviews-page-title':"Dodaj opinię",
+'all-reviews-title':"Wszystkie opinie",
+'logged-user':"Zalogowany jako:",
+'logout-btn':"Wyloguj",
+'login-prompt-title':"Zaloguj się aby dodać opinię",
+'open-login-btn':"🔐 Zaloguj się"
+},
+en:{
+title:"Optimize your Windows like a pro",
+desc:"Boost FPS, remove lag and speed up your system.",
+download:"⬇ Download",
+how:"How it works",
+c1:"⚡ Optimizes your PC",
+c2:"🌐 Optimizes internet",
+c3:"🧹 Cleans unnecessary files",
+support:"Support us",
+'reviews-title':"User Reviews",
+'add-review':"💬 Add Review",
+'nav-home':"Home",
+'nav-reviews':"Reviews",
+'back-home':"← Back",
+'login-title':"Sign in",
+'login-desc':"Sign in to add a review",
+'login-email-label':"Email:",
+'login-password-label':"Password:",
+'login-btn':"🔐 Sign in",
+'no-account-text':"Don't have an account?",
+'switch-to-register':"Sign up",
+'register-title':"Sign up",
+'register-desc':"Create an account to add reviews",
+'register-username-label':"Username:",
+'register-email-label':"Email:",
+'register-avatar-label':"Avatar:",
+'register-password-label':"Password:",
+'register-confirm-label':"Confirm password:",
+'register-btn':"✓ Sign up",
+'have-account-text':"Already have an account?",
+'switch-to-login':"Sign in",
+'rating-label':"Rating:",
+'opinion-label':"Your opinion:",
+'submit-btn':"Submit Review",
+'reviews-page-title':"Add a Review",
+'all-reviews-title':"All Reviews",
+'logged-user':"Logged in as:",
+'logout-btn':"Sign out",
+'login-prompt-title':"Sign in to add a review",
+'open-login-btn':"🔐 Sign in"
+},
+de:{
+title:"Optimieren Sie Windows wie ein Profi",
+desc:"Erhöhen Sie die FPS, reduzieren Sie Verzögerungen und beschleunigen Sie Ihr System.",
+download:"⬇ Herunterladen",
+how:"So funktioniert es",
+c1:"⚡ Optimiert Ihren PC",
+c2:"🌐 Optimiert das Internet",
+c3:"🧹 Löscht unnötige Dateien",
+support:"Unterstützen Sie uns",
+'reviews-title':"Benutzerbewertungen",
+'add-review':"💬 Bewertung hinzufügen",
+'nav-home':"Startseite",
+'nav-reviews':"Bewertungen",
+'back-home':"← Zurück",
+'login-title':"Anmelden",
+'login-desc':"Melden Sie sich an, um eine Bewertung abzugeben",
+'login-email-label':"E-Mail:",
+'login-password-label':"Passwort:",
+'login-btn':"🔐 Anmelden",
+'no-account-text':"Haben Sie kein Konto?",
+'switch-to-register':"Registrieren",
+'register-title':"Registrieren",
+'register-desc':"Erstelle ein Konto, um Bewertungen hinzuzufügen",
+'register-username-label':"Benutzername:",
+'register-email-label':"E-Mail:",
+'register-avatar-label':"Avatar:",
+'register-password-label':"Passwort:",
+'register-confirm-label':"Passwort wiederholen:",
+'register-btn':"✓ Registrieren",
+'have-account-text':"Sie haben bereits ein Konto?",
+'switch-to-login':"Anmelden",
+'rating-label':"Bewertung:",
+'opinion-label':"Deine Meinung:",
+'submit-btn':"Bewertung einreichen",
+'reviews-page-title':"Bewertung abgeben",
+'all-reviews-title':"Alle Bewertungen",
+'logged-user':"Angemeldet als:",
+'logout-btn':"Abmelden",
+'login-prompt-title':"Melden Sie sich an, um eine Bewertung abzugeben",
+'open-login-btn':"🔐 Anmelden"
+},
+ru:{
+title:"Оптимизируй Windows как профи",
+desc:"Увеличь FPS и ускорь систему.",
+download:"⬇ Скачать",
+how:"Как это работает",
+c1:"⚡ Оптимизация ПК",
+c2:"🌐 Оптимизация интернета",
+c3:"🧹 Очистка файлов",
+support:"Поддержать",
+'reviews-title':"Отзывы пользователей",
+'add-review':"💬 Добавить отзыв",
+'nav-home':"Главная",
+'nav-reviews':"Отзывы",
+'back-home':"← Назад",
+'login-title':"Вход",
+'login-desc':"Войдите, чтобы добавить отзыв",
+'login-email-label':"Электронная почта:",
+'login-password-label':"Пароль:",
+'login-btn':"🔐 Вход",
+'no-account-text':"Нет аккаунта?",
+'switch-to-register':"Зарегистрируйтесь",
+'register-title':"Регистрация",
+'register-desc':"Создайте аккаунт для добавления отзывов",
+'register-username-label':"Имя пользователя:",
+'register-email-label':"Электронная почта:",
+'register-avatar-label':"Аватар:",
+'register-password-label':"Пароль:",
+'register-confirm-label':"Повторите пароль:",
+'register-btn':"✓ Зарегистрироваться",
+'have-account-text':"Уже есть аккаунт?",
+'switch-to-login':"Вход",
+'rating-label':"Оценка:",
+'opinion-label':"Ваше мнение:",
+'submit-btn':"Отправить отзыв",
+'reviews-page-title':"Добавить отзыв",
+'all-reviews-title':"Все отзывы",
+'logged-user':"Авторизован как:",
+'logout-btn':"Выход",
+'login-prompt-title':"Войдите, чтобы добавить отзыв",
+'open-login-btn':"🔐 Вход"
+},
+ua:{
+title:"Оптимізуй Windows як профі",
+desc:"Збільш FPS та прискор систему.",
+download:"⬇ Завантажити",
+how:"Як це працює",
+c1:"⚡ Оптимізація ПК",
+c2:"🌐 Оптимізація інтернету",
+c3:"🧹 Очищення файлів",
+support:"Підтримати",
+'reviews-title':"Відгуки користувачів",
+'add-review':"💬 Додати відгук",
+'nav-home':"Головна",
+'nav-reviews':"Відгуки",
+'back-home':"← Назад",
+'login-title':"Вхід",
+'login-desc':"Увійдіть, щоб залишити відгук",
+'login-email-label':"Електронна пошта:",
+'login-password-label':"Пароль:",
+'login-btn':"🔐 Вхід",
+'no-account-text':"Немає облікового запису?",
+'switch-to-register':"Зареєструйтеся",
+'register-title':"Реєстрація",
+'register-desc':"Створіть обліковий запис для додавання відгуків",
+'register-username-label':"Ім'я користувача:",
+'register-email-label':"Електронна пошта:",
+'register-avatar-label':"Аватар:",
+'register-password-label':"Пароль:",
+'register-confirm-label':"Повторіть пароль:",
+'register-btn':"✓ Зареєструйтеся",
+'have-account-text':"Вже є обліковий запис?",
+'switch-to-login':"Вхід",
+'rating-label':"Оцінка:",
+'opinion-label':"Ваша думка:",
+'submit-btn':"Надіслати відгук",
+'reviews-page-title':"Додати відгук",
+'all-reviews-title':"Усі відгуки",
+'logged-user':"Авторизовано як:",
+'logout-btn':"Вихід",
+'login-prompt-title':"Увійдіть, щоб залишити відгук",
+'open-login-btn':"🔐 Вхід"
+},
+es:{
+title:"Optimiza Windows como un profesional",
+desc:"Mejora FPS y acelera tu sistema.",
+download:"⬇ Descargar",
+how:"Cómo funciona",
+c1:"⚡ Optimiza el PC",
+c2:"🌐 Optimiza internet",
+c3:"🧹 Limpia archivos",
+support:"Apóyanos",
+'reviews-title':"Opiniones de usuarios",
+'add-review':"💬 Agregar opinión",
+'nav-home':"Inicio",
+'nav-reviews':"Opiniones",
+'back-home':"← Atrás",
+'login-title':"Iniciar sesión",
+'login-desc':"Inicie sesión para agregar una opinión",
+'login-email-label':"Correo electrónico:",
+'login-password-label':"Contraseña:",
+'login-btn':"🔐 Iniciar sesión",
+'no-account-text':"¿No tienes cuenta?",
+'switch-to-register':"Registrarse",
+'register-title':"Registrarse",
+'register-desc':"Crea una cuenta para agregar opiniones",
+'register-username-label':"Nombre de usuario:",
+'register-email-label':"Correo electrónico:",
+'register-avatar-label':"Avatar:",
+'register-password-label':"Contraseña:",
+'register-confirm-label':"Confirmar contraseña:",
+'register-btn':"✓ Registrarse",
+'have-account-text':"¿Ya tienes cuenta?",
+'switch-to-login':"Iniciar sesión",
+'rating-label':"Calificación:",
+'opinion-label':"Tu opinión:",
+'submit-btn':"Enviar opinión",
+'reviews-page-title':"Agregar opinión",
+'all-reviews-title':"Todas las opiniones",
+'logged-user':"Autenticado como:",
+'logout-btn':"Cerrar sesión",
+'login-prompt-title':"Inicie sesión para agregar una opinión",
+'open-login-btn':"🔐 Iniciar sesión"
+}
+};
+
+function changeLang(lang){
+    currentLang=lang;
+    let t=translations[lang];
+
+    document.getElementById("title").innerText=t.title;
+    document.getElementById("desc").innerText=t.desc;
+    document.getElementById("download-btn").innerText=t.download;
+    document.getElementById("how-title").innerText=t.how;
+    document.getElementById("c1").innerText=t.c1;
+    document.getElementById("c2").innerText=t.c2;
+    document.getElementById("c3").innerText=t.c3;
+    document.getElementById("support-text").innerText=t.support;
+    document.getElementById("reviews-title").innerText=t['reviews-title'];
+    document.getElementById("add-review-btn").innerText=t['add-review'];
+    document.getElementById("nav-home").innerText=t['nav-home'];
+    document.getElementById("nav-reviews").innerText=t['nav-reviews'];
+    document.getElementById("back-home").innerText=t['back-home'];
+    document.getElementById("back-reviews").innerText=t['back-home'];
+    document.getElementById("login-title").innerText=t['login-title'];
+    document.getElementById("login-desc").innerText=t['login-desc'];
+    document.getElementById("login-email-label").innerText=t['login-email-label'];
+    document.getElementById("login-password-label").innerText=t['login-password-label'];
+    document.getElementById("login-btn").innerText=t['login-btn'];
+    document.getElementById("no-account-text").innerText=t['no-account-text'];
+    document.getElementById("switch-to-register").innerText=t['switch-to-register'];
+    document.getElementById("register-title").innerText=t['register-title'];
+    document.getElementById("register-desc").innerText=t['register-desc'];
+    document.getElementById("register-username-label").innerText=t['register-username-label'];
+    document.getElementById("register-email-label").innerText=t['register-email-label'];
+    document.getElementById("register-avatar-label").innerText=t['register-avatar-label'];
+    document.getElementById("register-password-label").innerText=t['register-password-label'];
+    document.getElementById("register-confirm-label").innerText=t['register-confirm-label'];
+    document.getElementById("register-btn").innerText=t['register-btn'];
+    document.getElementById("have-account-text").innerText=t['have-account-text'];
+    document.getElementById("switch-to-login").innerText=t['switch-to-login'];
+    document.getElementById("rating-label").innerText=t['rating-label'];
+    document.getElementById("opinion-label").innerText=t['opinion-label'];
+    document.getElementById("submit-btn").innerText=t['submit-btn'];
+    document.getElementById("reviews-page-title").innerText=t['reviews-page-title'];
+    document.getElementById("all-reviews-title").innerText=t['all-reviews-title'];
+    document.getElementById("logout-btn").innerText=t['logout-btn'];
+    document.getElementById("login-prompt-title").innerText=t['login-prompt-title'];
+    document.getElementById("open-login-btn").innerText=t['open-login-btn'];
+}
+
+// INICJALIZACJA
+window.addEventListener('load',()=>{
+    initializeFirebase();
+    initializeGoogleAuth();
+    loadReviews();
+    updateUserProfile();
+    
+    // Licznik znaków w opinii
+    const opinionField=document.getElementById('opinion');
+    if(opinionField){
+        opinionField.addEventListener('input',function(){
+            document.getElementById('char-count').innerText=this.value.length+'/500';
+        });
+    }
+    
+    // Close modal when clicking outside
+    window.onclick=function(event){
+        const modal=document.getElementById('auth-modal');
+        if(event.target===modal){
+            closeAuthModal();
+        }
+    }
+});
+
+</script>
+
+</body>
+</html>
